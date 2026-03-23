@@ -5,10 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { toast } from 'ngx-sonner';
 import { Fund, FundCategory } from '../../../core/domain/entities/fund.model';
 import { FundMockService } from '../../../core/infrastructure/services/fund-mock.service';
-import { AppStateService } from '../../../core/application/state/app-state.service';
+import { AppStateService } from '../../../core/application/app-state.service';
 import { FundCardComponent } from '../components/fund-card/fund-card.component';
 import {
   SubscribeModalComponent,
@@ -26,7 +26,6 @@ export class FundListComponent implements OnInit {
   private readonly fundService = inject(FundMockService);
   private readonly stateService = inject(AppStateService);
   private readonly dialog = inject(MatDialog);
-  private readonly snackBar = inject(MatSnackBar);
 
   allFunds: Fund[] = [];
   filteredFunds: Fund[] = [];
@@ -56,6 +55,8 @@ export class FundListComponent implements OnInit {
     const dialogRef = this.dialog.open(SubscribeModalComponent, {
       data: { fund } as SubscribeModalData,
       width: '440px',
+      maxHeight: '95vh',
+      autoFocus: 'input',
     });
 
     dialogRef.afterClosed().subscribe((result?: SubscribeModalResult) => {
@@ -68,14 +69,10 @@ export class FundListComponent implements OnInit {
       );
 
       if (error) {
-        this.snackBar.open(error, 'Cerrar', { duration: 5000, panelClass: 'snackbar--error' });
+        toast.error('Error', { description: error });
       } else {
-        const method = result.notificationMethod === 'email' ? 'correo electronico' : 'SMS';
-        this.snackBar.open(
-          `Suscripcion exitosa a ${result.fund.name}. Se notifico por ${method}.`,
-          'OK',
-          { duration: 4000 },
-        );
+        const method = result.notificationMethod === 'email' ? 'Email' : 'SMS';
+        toast.success('Suscripcion exitosa', { description: `Notificado por ${method}` });
       }
     });
   }
@@ -84,9 +81,9 @@ export class FundListComponent implements OnInit {
     const error = this.stateService.cancelSubscription(fund.id);
 
     if (error) {
-      this.snackBar.open(error, 'Cerrar', { duration: 5000, panelClass: 'snackbar--error' });
+      toast.error('Error', { description: error });
     } else {
-      this.snackBar.open(`Se cancelo la suscripcion a ${fund.name}`, 'OK', { duration: 4000 });
+      toast.success('Suscripcion cancelada', { description: fund.name });
     }
   }
 }

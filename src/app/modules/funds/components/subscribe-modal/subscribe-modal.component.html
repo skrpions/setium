@@ -1,37 +1,56 @@
-<h2 mat-dialog-title class="subscribe-modal__title">
-  <mat-icon class="subscribe-modal__title-icon">add_circle</mat-icon>
-  Suscribirse a fondo
-</h2>
+<!-- Header -->
+<div class="subscribe-modal__header">
+  <div class="subscribe-modal__header-icon">
+    <mat-icon>add_circle</mat-icon>
+  </div>
+  <h2 class="subscribe-modal__header-title">Suscribirse a fondo</h2>
+  <p class="subscribe-modal__header-subtitle">Completa los datos para vincular tu inversion</p>
+  <button mat-icon-button mat-dialog-close class="subscribe-modal__close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-divider />
 
 <mat-dialog-content class="subscribe-modal__content">
+  <!-- Info del fondo -->
   <div class="subscribe-modal__fund-info">
-    <div class="subscribe-modal__fund-header">
+    <mat-icon class="subscribe-modal__fund-icon">
+      {{ data.fund.category === 'FPV' ? 'savings' : 'account_balance_wallet' }}
+    </mat-icon>
+    <div class="subscribe-modal__fund-detail">
       <span class="subscribe-modal__fund-name">{{ data.fund.name }}</span>
-      <mat-chip>{{ data.fund.category }}</mat-chip>
+      <div class="subscribe-modal__fund-meta">
+        <mat-chip>{{ data.fund.category }}</mat-chip>
+        <span class="subscribe-modal__fund-min">
+          Min: {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}
+        </span>
+      </div>
     </div>
-    <span class="subscribe-modal__fund-min">
-      Monto minimo: {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}
-    </span>
   </div>
 
+  <!-- Monto -->
   <mat-form-field appearance="fill" class="subscribe-modal__field">
     <mat-label>Monto a invertir (COP)</mat-label>
+    <mat-icon matPrefix>attach_money</mat-icon>
     <input
       matInput
-      type="number"
-      [min]="data.fund.minAmount"
       [formControl]="amountControl"
+      mask="separator.0"
+      thousandSeparator="."
+      separatorLimit="999999999999"
     />
-    <mat-icon matPrefix>attach_money</mat-icon>
     @if (amountControl.hasError('required')) {
       <mat-error>El monto es obligatorio</mat-error>
+    } @else if (amountControl.hasError('min')) {
+      <mat-error>Minimo {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</mat-error>
     }
-    @if (amountControl.hasError('min')) {
-      <mat-error>El monto minimo es {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</mat-error>
-    }
-    <mat-hint>Ingrese el monto que desea invertir</mat-hint>
+    <mat-hint>
+      Minimo: {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}
+    </mat-hint>
   </mat-form-field>
 
+  <!-- Notificacion -->
   <div class="subscribe-modal__notification">
     <span class="subscribe-modal__notification-label">Metodo de notificacion</span>
     <app-notification-selector
@@ -41,8 +60,12 @@
   </div>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end" class="subscribe-modal__actions">
-  <button mat-button mat-dialog-close>Cancelar</button>
+<mat-divider />
+
+<mat-dialog-actions class="subscribe-modal__actions">
+  <button mat-stroked-button mat-dialog-close>
+    Cancelar
+  </button>
   <button
     mat-flat-button
     [disabled]="amountControl.invalid"

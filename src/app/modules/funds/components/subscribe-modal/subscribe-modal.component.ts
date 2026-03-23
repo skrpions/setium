@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { NgxMaskDirective } from 'ngx-mask';
 import { Fund } from '../../../../core/domain/entities/fund.model';
 import { NotificationMethod } from '../../../../core/domain/entities/transaction.model';
 import { NotificationSelectorComponent } from '../../../../shared/components/notification-selector/notification-selector.component';
@@ -32,6 +34,8 @@ export interface SubscribeModalResult {
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    MatDividerModule,
+    NgxMaskDirective,
     NotificationSelectorComponent,
   ],
   templateUrl: './subscribe-modal.component.html',
@@ -42,7 +46,10 @@ export class SubscribeModalComponent {
   readonly data: SubscribeModalData = inject(MAT_DIALOG_DATA);
 
   amountControl = new FormControl<number | null>(this.data.fund.minAmount, {
-    validators: [Validators.required, Validators.min(this.data.fund.minAmount)],
+    validators: [
+      Validators.required,
+      Validators.min(this.data.fund.minAmount),
+    ],
   });
 
   notificationMethod: NotificationMethod = 'email';

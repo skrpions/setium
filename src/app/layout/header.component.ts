@@ -4,11 +4,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AppStateService } from '../core/application/state/app-state.service';
+import { AppStateService } from '../core/application/app-state.service';
 
 @Component({
   selector: 'app-header',
-  imports: [AsyncPipe, CurrencyPipe, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [AsyncPipe, CurrencyPipe, RouterLink, RouterLinkActive, MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

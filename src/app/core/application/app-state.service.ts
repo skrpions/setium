@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Fund } from '../../domain/entities/fund.model';
-import { Subscription } from '../../domain/entities/subscription.model';
-import { Transaction, NotificationMethod } from '../../domain/entities/transaction.model';
+import { Fund } from '../domain/entities/fund.model';
+import { Subscription } from '../domain/entities/subscription.model';
+import { Transaction, NotificationMethod } from '../domain/entities/transaction.model';
 
 /** Saldo inicial del usuario en COP */
 const INITIAL_BALANCE = 500000;
@@ -109,6 +109,7 @@ export class AppStateService {
       type: 'cancellation',
       amount: subscription.amount,
       date: new Date(),
+      notificationMethod: subscription.notificationMethod,
     };
     this.transactionsSubject.next([transaction, ...this.transactionsSubject.getValue()]);
 

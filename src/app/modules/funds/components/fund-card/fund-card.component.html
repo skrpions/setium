@@ -1,4 +1,8 @@
 <mat-card class="fund-card" [class.fund-card--subscribed]="isSubscribed()">
+  @if (isSubscribed()) {
+    <span class="fund-card__badge">Suscrito</span>
+  }
+
   <mat-card-header class="fund-card__header">
     <mat-icon mat-card-avatar class="fund-card__avatar">
       {{ fund().category === 'FPV' ? 'savings' : 'account_balance_wallet' }}

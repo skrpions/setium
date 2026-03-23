@@ -1,5 +1,10 @@
 <div class="transaction-list">
-  <h2 class="page-title">Historial de transacciones</h2>
+  <div class="transaction-list__header">
+    <div>
+      <h2 class="page-title">Historial de transacciones</h2>
+      <p class="transaction-list__subtitle">Registro de suscripciones y cancelaciones</p>
+    </div>
+  </div>
 
   @if ((transactions$ | async); as transactions) {
     @if (transactions.length === 0) {

@@ -1,5 +1,11 @@
 <div class="fund-list">
-  <h2 class="page-title">Fondos disponibles</h2>
+  <div class="fund-list__header">
+    <div>
+      <h2 class="page-title">Fondos disponibles</h2>
+      <p class="fund-list__subtitle">Selecciona un fondo para suscribirte</p>
+    </div>
+    <span class="fund-list__count">{{ filteredFunds.length }} fondos</span>
+  </div>
 
   <!-- Filtro por categoria -->
   <mat-chip-listbox

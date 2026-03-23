@@ -3,7 +3,7 @@ import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { AppStateService } from '../../../core/application/state/app-state.service';
+import { AppStateService } from '../../../core/application/app-state.service';
 
 @Component({
   selector: 'app-transaction-list',

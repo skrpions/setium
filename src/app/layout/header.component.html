@@ -1,25 +1,27 @@
-<mat-toolbar class="header">
+<header class="header">
   <div class="header__brand">
-    <mat-icon class="header__logo">account_balance</mat-icon>
+    <div class="header__logo-wrapper">
+      <mat-icon class="header__logo">account_balance</mat-icon>
+    </div>
     <span class="header__title">Setium</span>
   </div>
 
   <nav class="header__nav">
-    <a mat-button routerLink="/funds" routerLinkActive="header__nav-link--active" class="header__nav-link">
+    <a routerLink="/funds" routerLinkActive="header__nav-link--active" class="header__nav-link">
       <mat-icon>trending_up</mat-icon>
       <span>Fondos</span>
     </a>
-    <a mat-button routerLink="/transactions" routerLinkActive="header__nav-link--active" class="header__nav-link">
+    <a routerLink="/transactions" routerLinkActive="header__nav-link--active" class="header__nav-link">
       <mat-icon>receipt_long</mat-icon>
       <span>Transacciones</span>
     </a>
   </nav>
 
   <div class="header__balance">
-    <span class="header__balance-label">Saldo disponible</span>
-    <span class="header__balance-amount">
-      <mat-icon class="header__balance-icon">account_balance_wallet</mat-icon>
-      {{ stateService.userBalance$ | async | currency:'COP':'symbol-narrow':'1.0-0' }}
-    </span>
+    <mat-icon class="header__balance-icon">account_balance_wallet</mat-icon>
+    <div class="header__balance-info">
+      <span class="header__balance-label">Saldo disponible</span>
+      <span class="header__balance-amount">{{ stateService.userBalance$ | async | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+    </div>
   </div>
-</mat-toolbar>
+</header>

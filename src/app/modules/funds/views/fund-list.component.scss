@@ -1,4 +1,27 @@
 .fund-list {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+    margin: 4px 0 0;
+  }
+
+  &__count {
+    font-size: 13px;
+    color: var(--mat-sys-on-surface-variant);
+    background: #ecfeff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
   &__filters {
     margin-bottom: 24px;
   }

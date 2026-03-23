@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 import { AppStateService } from './app-state.service';
-import { Fund } from '../../domain/entities/fund.model';
+import { Fund } from '../domain/entities/fund.model';
 
 const MOCK_FUND: Fund = { id: 1, name: 'FPV_BTG_PACTUAL_RECAUDADORA', minAmount: 75000, category: 'FPV' };
 

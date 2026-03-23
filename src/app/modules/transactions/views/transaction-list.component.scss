@@ -1,5 +1,16 @@
 .transaction-list {
+  &__header {
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+    margin: 4px 0 0;
+  }
+
   &__table-wrapper {
+    background: #ffffff;
     border-radius: 16px;
     border: 1px solid var(--mat-sys-outline-variant);
     overflow: hidden;
@@ -7,6 +18,32 @@
 
   &__table {
     width: 100%;
+
+    // Header de la tabla
+    tr.mat-mdc-header-row {
+      background: #ecfeff;
+    }
+
+    th.mat-mdc-header-cell {
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    // Filas alternas
+    tr.mat-mdc-row:nth-child(even) {
+      background: #fafffe;
+    }
+
+    tr.mat-mdc-row {
+      transition: background 0.1s ease;
+
+      &:hover {
+        background: #ecfeff;
+      }
+    }
   }
 
   &__chip {
@@ -15,6 +52,7 @@
 
   &__amount {
     font-weight: 600;
+    font-size: 14px;
     color: var(--mat-sys-on-surface);
 
     &--credit {
@@ -66,6 +104,11 @@
   border-radius: 16px;
   padding: 16px;
   background: #ffffff;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 
   &__header {
     display: flex;

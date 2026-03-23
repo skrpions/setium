@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TransactionListComponent } from './transaction-list.component';
-import { AppStateService } from '../../../core/application/state/app-state.service';
+import { AppStateService } from '../../../core/application/app-state.service';
 import { Fund } from '../../../core/domain/entities/fund.model';
 
 const MOCK_FUND: Fund = { id: 1, name: 'FPV_BTG_PACTUAL_RECAUDADORA', minAmount: 75000, category: 'FPV' };

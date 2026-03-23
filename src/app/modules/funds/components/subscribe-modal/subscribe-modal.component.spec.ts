@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { provideNgxMask } from 'ngx-mask';
 import { SubscribeModalComponent, SubscribeModalData } from './subscribe-modal.component';
 import { Fund } from '../../../../core/domain/entities/fund.model';
 
@@ -18,6 +19,7 @@ describe('SubscribeModalComponent - Validacion de formulario', () => {
       imports: [SubscribeModalComponent],
       providers: [
         provideAnimationsAsync(),
+        provideNgxMask(),
         { provide: MatDialogRef, useValue: dialogRefSpy },
         { provide: MAT_DIALOG_DATA, useValue: { fund: MOCK_FUND } as SubscribeModalData },
       ],
@@ -48,7 +50,7 @@ describe('SubscribeModalComponent - Validacion de formulario', () => {
     component.amountControl.setValue(125000);
     expect(component.amountControl.valid).toBe(true);
 
-    component.amountControl.setValue(200000);
+    component.amountControl.setValue(500000);
     expect(component.amountControl.valid).toBe(true);
   });
 
