@@ -4,11 +4,11 @@ export const routes: Routes = [
   { path: '', redirectTo: 'funds', pathMatch: 'full' },
   {
     path: 'funds',
-    loadComponent: () => import('./features/funds/views/fund-list').then(m => m.FundListComponent),
+    loadComponent: () => import('./modules/funds/views/fund-list.component').then(m => m.FundListComponent),
   },
   {
     path: 'transactions',
-    loadComponent: () => import('./features/transactions/views/transaction-list').then(m => m.TransactionListComponent),
+    loadComponent: () => import('./modules/transactions/views/transaction-list.component').then(m => m.TransactionListComponent),
   },
   { path: '**', redirectTo: 'funds' },
 ];

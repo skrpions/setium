@@ -4,13 +4,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AppStateService } from '../core/state/app-state.service';
+import { AppStateService } from '../core/application/state/app-state.service';
 
 @Component({
   selector: 'app-header',
   imports: [AsyncPipe, CurrencyPipe, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule, MatIconModule],
-  templateUrl: './header.html',
-  styleUrl: './header.scss',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   readonly stateService = inject(AppStateService);

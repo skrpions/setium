@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Fund } from '../models/fund.model';
-import { FundRepository } from '../interfaces/fund-repository.interface';
+import { Fund } from '../../domain/entities/fund.model';
+import { FundRepository } from '../../domain/repositories/fund-repository';
 
 /** Datos mock de los fondos disponibles */
 const MOCK_FUNDS: Fund[] = [

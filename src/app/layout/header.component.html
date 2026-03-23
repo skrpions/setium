@@ -17,6 +17,9 @@
 
   <div class="header__balance">
     <span class="header__balance-label">Saldo disponible</span>
-    <span class="header__balance-amount">{{ stateService.userBalance$ | async | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+    <span class="header__balance-amount">
+      <mat-icon class="header__balance-icon">account_balance_wallet</mat-icon>
+      {{ stateService.userBalance$ | async | currency:'COP':'symbol-narrow':'1.0-0' }}
+    </span>
   </div>
 </mat-toolbar>

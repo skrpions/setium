@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Fund } from '../models/fund.model';
-import { Subscription } from '../models/subscription.model';
-import { Transaction, NotificationMethod } from '../models/transaction.model';
+import { Fund } from '../../domain/entities/fund.model';
+import { Subscription } from '../../domain/entities/subscription.model';
+import { Transaction, NotificationMethod } from '../../domain/entities/transaction.model';
 
 /** Saldo inicial del usuario en COP */
 const INITIAL_BALANCE = 500000;

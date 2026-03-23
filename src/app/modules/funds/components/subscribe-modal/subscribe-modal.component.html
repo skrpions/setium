@@ -1,0 +1,54 @@
+<h2 mat-dialog-title class="subscribe-modal__title">
+  <mat-icon class="subscribe-modal__title-icon">add_circle</mat-icon>
+  Suscribirse a fondo
+</h2>
+
+<mat-dialog-content class="subscribe-modal__content">
+  <div class="subscribe-modal__fund-info">
+    <div class="subscribe-modal__fund-header">
+      <span class="subscribe-modal__fund-name">{{ data.fund.name }}</span>
+      <mat-chip>{{ data.fund.category }}</mat-chip>
+    </div>
+    <span class="subscribe-modal__fund-min">
+      Monto minimo: {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}
+    </span>
+  </div>
+
+  <mat-form-field appearance="fill" class="subscribe-modal__field">
+    <mat-label>Monto a invertir (COP)</mat-label>
+    <input
+      matInput
+      type="number"
+      [min]="data.fund.minAmount"
+      [formControl]="amountControl"
+    />
+    <mat-icon matPrefix>attach_money</mat-icon>
+    @if (amountControl.hasError('required')) {
+      <mat-error>El monto es obligatorio</mat-error>
+    }
+    @if (amountControl.hasError('min')) {
+      <mat-error>El monto minimo es {{ data.fund.minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</mat-error>
+    }
+    <mat-hint>Ingrese el monto que desea invertir</mat-hint>
+  </mat-form-field>
+
+  <div class="subscribe-modal__notification">
+    <span class="subscribe-modal__notification-label">Metodo de notificacion</span>
+    <app-notification-selector
+      [value]="notificationMethod"
+      (selectionChange)="notificationMethod = $event"
+    />
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="subscribe-modal__actions">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-flat-button
+    [disabled]="amountControl.invalid"
+    (click)="confirm()"
+  >
+    <mat-icon>check_circle</mat-icon>
+    Confirmar suscripcion
+  </button>
+</mat-dialog-actions>

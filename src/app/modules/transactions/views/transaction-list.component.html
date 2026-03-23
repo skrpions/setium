@@ -1,0 +1,104 @@
+<div class="transaction-list">
+  <h2 class="page-title">Historial de transacciones</h2>
+
+  @if ((transactions$ | async); as transactions) {
+    @if (transactions.length === 0) {
+      <div class="empty-state">
+        <mat-icon class="empty-state__icon">receipt_long</mat-icon>
+        <p class="empty-state__title">Sin transacciones</p>
+        <p class="empty-state__message">Aun no has realizado ninguna operacion</p>
+      </div>
+    } @else {
+      <!-- Vista desktop: tabla -->
+      <div class="transaction-list__table-wrapper">
+        <table mat-table [dataSource]="transactions" class="transaction-list__table">
+
+          <!-- Tipo -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let t">
+              <mat-chip [highlighted]="t.type === 'subscription'" class="transaction-list__chip">
+                <mat-icon matChipAvatar>
+                  {{ t.type === 'subscription' ? 'add_circle' : 'remove_circle' }}
+                </mat-icon>
+                {{ t.type === 'subscription' ? 'Apertura' : 'Cancelacion' }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- Fondo -->
+          <ng-container matColumnDef="fundName">
+            <th mat-header-cell *matHeaderCellDef>Fondo</th>
+            <td mat-cell *matCellDef="let t">{{ t.fundName }}</td>
+          </ng-container>
+
+          <!-- Monto -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>Monto</th>
+            <td mat-cell *matCellDef="let t" class="transaction-list__amount"
+                [class.transaction-list__amount--credit]="t.type === 'cancellation'">
+              {{ t.type === 'subscription' ? '-' : '+' }}{{ t.amount | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </td>
+          </ng-container>
+
+          <!-- Notificacion -->
+          <ng-container matColumnDef="notification">
+            <th mat-header-cell *matHeaderCellDef>Notificacion</th>
+            <td mat-cell *matCellDef="let t">
+              @if (t.notificationMethod) {
+                <span class="transaction-list__notification">
+                  <mat-icon>{{ t.notificationMethod === 'email' ? 'email' : 'sms' }}</mat-icon>
+                  {{ t.notificationMethod === 'email' ? 'Email' : 'SMS' }}
+                </span>
+              } @else {
+                <span class="transaction-list__notification transaction-list__notification--na">N/A</span>
+              }
+            </td>
+          </ng-container>
+
+          <!-- Fecha -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let t">{{ t.date | date:'dd/MM/yyyy HH:mm' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <!-- Vista mobile: cards -->
+      <div class="transaction-list__cards">
+        @for (t of transactions; track t.id) {
+          <div class="transaction-card">
+            <div class="transaction-card__header">
+              <mat-icon class="transaction-card__icon"
+                        [class.transaction-card__icon--cancel]="t.type === 'cancellation'">
+                {{ t.type === 'subscription' ? 'add_circle' : 'remove_circle' }}
+              </mat-icon>
+              <div class="transaction-card__info">
+                <span class="transaction-card__type">
+                  {{ t.type === 'subscription' ? 'Apertura' : 'Cancelacion' }}
+                </span>
+                <span class="transaction-card__fund">{{ t.fundName }}</span>
+              </div>
+              <span class="transaction-card__amount"
+                    [class.transaction-card__amount--credit]="t.type === 'cancellation'">
+                {{ t.type === 'subscription' ? '-' : '+' }}{{ t.amount | currency:'COP':'symbol-narrow':'1.0-0' }}
+              </span>
+            </div>
+            <div class="transaction-card__footer">
+              <span class="transaction-card__date">{{ t.date | date:'dd/MM/yyyy HH:mm' }}</span>
+              @if (t.notificationMethod) {
+                <span class="transaction-card__notification">
+                  <mat-icon>{{ t.notificationMethod === 'email' ? 'email' : 'sms' }}</mat-icon>
+                  {{ t.notificationMethod === 'email' ? 'Email' : 'SMS' }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

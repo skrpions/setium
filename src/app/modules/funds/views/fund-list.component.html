@@ -1,0 +1,36 @@
+<div class="fund-list">
+  <h2 class="page-title">Fondos disponibles</h2>
+
+  <!-- Filtro por categoria -->
+  <mat-chip-listbox
+    class="fund-list__filters"
+    (change)="filterByCategory($event.value)"
+  >
+    <mat-chip-option value="">Todos</mat-chip-option>
+    <mat-chip-option value="FPV">FPV</mat-chip-option>
+    <mat-chip-option value="FIC">FIC</mat-chip-option>
+  </mat-chip-listbox>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (filteredFunds.length === 0) {
+    <div class="empty-state">
+      <mat-icon class="empty-state__icon">search_off</mat-icon>
+      <p class="empty-state__title">No se encontraron fondos</p>
+      <p class="empty-state__message">Intenta con otra categoria</p>
+    </div>
+  } @else {
+    <div class="fund-list__grid">
+      @for (fund of filteredFunds; track fund.id) {
+        <app-fund-card
+          [fund]="fund"
+          [isSubscribed]="(isSubscribed(fund.id) | async) ?? false"
+          (onSubscribe)="openSubscribeModal($event)"
+          (onCancel)="cancelSubscription($event)"
+        />
+      }
+    </div>
+  }
+</div>

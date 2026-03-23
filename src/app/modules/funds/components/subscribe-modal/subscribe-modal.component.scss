@@ -1,0 +1,68 @@
+.subscribe-modal {
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--mat-sys-on-surface);
+  }
+
+  &__title-icon {
+    color: var(--mat-sys-primary);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 320px;
+  }
+
+  &__fund-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px;
+    background: #ecfeff;
+    border-radius: 12px;
+    border: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  &__fund-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__fund-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--mat-sys-on-surface);
+    word-break: break-all;
+    flex: 1;
+  }
+
+  &__fund-min {
+    font-size: 12px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__notification {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__notification-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &__actions {
+    padding-top: 8px;
+  }
+}

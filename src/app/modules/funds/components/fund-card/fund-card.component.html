@@ -1,0 +1,32 @@
+<mat-card class="fund-card" [class.fund-card--subscribed]="isSubscribed()">
+  <mat-card-header class="fund-card__header">
+    <mat-icon mat-card-avatar class="fund-card__avatar">
+      {{ fund().category === 'FPV' ? 'savings' : 'account_balance_wallet' }}
+    </mat-icon>
+    <mat-card-title class="fund-card__name">{{ fund().name }}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-chip class="fund-card__category">{{ fund().category }}</mat-chip>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="fund-card__content">
+    <div class="fund-card__detail">
+      <span class="fund-card__label">Monto minimo</span>
+      <span class="fund-card__amount">{{ fund().minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="fund-card__actions">
+    @if (isSubscribed()) {
+      <button mat-stroked-button color="warn" (click)="onCancel.emit(fund())">
+        <mat-icon>cancel</mat-icon>
+        Cancelar
+      </button>
+    } @else {
+      <button mat-flat-button (click)="onSubscribe.emit(fund())">
+        <mat-icon>add_circle</mat-icon>
+        Suscribirse
+      </button>
+    }
+  </mat-card-actions>
+</mat-card>

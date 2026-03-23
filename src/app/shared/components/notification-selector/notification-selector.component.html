@@ -1,0 +1,15 @@
+<mat-radio-group
+  [value]="value"
+  (change)="onSelectionChange($event.value)"
+  class="notification-selector"
+>
+  <mat-radio-button value="email" class="notification-selector__option">
+    <mat-icon class="notification-selector__icon">email</mat-icon>
+    <span>Email</span>
+  </mat-radio-button>
+
+  <mat-radio-button value="sms" class="notification-selector__option">
+    <mat-icon class="notification-selector__icon">sms</mat-icon>
+    <span>SMS</span>
+  </mat-radio-button>
+</mat-radio-group>
