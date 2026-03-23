@@ -1,1 +1,166 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+$cyan-palette: (
+  0: #000000,
+  10: #053345,
+  20: #104e64,
+  25: #005f78,
+  30: #007595,
+  35: #0084a7,
+  40: #0092b8,
+  50: #00b8db,
+  60: #00d3f3,
+  70: #53eafd,
+  80: #a2f4fd,
+  90: #cefafe,
+  95: #ecfeff,
+  98: #f5fffe,
+  99: #fafffe,
+  100: #ffffff,
+  secondary: (
+    0: #000000,
+    10: #0b1f27,
+    20: #1e343d,
+    25: #283f49,
+    30: #334b55,
+    35: #3f5762,
+    40: #4b636e,
+    50: #647c88,
+    60: #7e96a2,
+    70: #98b1bd,
+    80: #b3ccd9,
+    90: #d0e8f5,
+    95: #e6f4fc,
+    98: #f3fafe,
+    99: #f9fdff,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    10: #1a1c1e,
+    20: #2f3133,
+    25: #3a3c3e,
+    30: #45484a,
+    35: #515356,
+    40: #5d5f62,
+    50: #76787b,
+    60: #8f9295,
+    70: #aaacaf,
+    80: #c6c7cb,
+    90: #e2e3e7,
+    95: #f0f1f5,
+    98: #f9f9fd,
+    99: #fcfcff,
+    100: #ffffff,
+    4: #0c0e10,
+    6: #121314,
+    12: #1e2022,
+    17: #282a2c,
+    22: #333537,
+    24: #38393b,
+    87: #d9dadd,
+    92: #e8e8ec,
+    94: #eeeff2,
+    96: #f4f4f7,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #131d21,
+    20: #283238,
+    25: #333d43,
+    30: #3e494f,
+    35: #4a555b,
+    40: #566168,
+    50: #6e7a81,
+    60: #88949b,
+    70: #a3aeb6,
+    80: #becad1,
+    90: #dae6ee,
+    95: #e9f3fa,
+    98: #f5fafd,
+    99: #fafcff,
+    100: #ffffff,
+  ),
+);
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: $cyan-palette,
+        tertiary: $cyan-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+.page-title {
+  font: var(--mat-sys-headline-small);
+  color: var(--mat-sys-on-surface);
+  margin-bottom: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--mat-sys-on-surface-variant);
+
+  &__icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--mat-sys-outline-variant);
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font: var(--mat-sys-title-medium);
+    margin-bottom: 8px;
+  }
+
+  &__message {
+    font: var(--mat-sys-body-medium);
+  }
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+}
+
+.error-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--mat-sys-error);
+
+  &__icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font: var(--mat-sys-title-medium);
+    margin-bottom: 8px;
+  }
+
+  &__message {
+    font: var(--mat-sys-body-medium);
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

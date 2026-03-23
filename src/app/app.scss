@@ -1,0 +1,11 @@
+.app__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+@media (max-width: 600px) {
+  .app__content {
+    padding: 16px;
+  }
+}
