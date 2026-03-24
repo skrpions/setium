@@ -119,3 +119,12 @@ npm test
 - **BEM en SCSS**: Metodologia de nombrado que facilita la escalabilidad y mantenimiento de estilos.
 - **Responsive**: Tabla en desktop, cards en mobile para transacciones. Grid adaptable para fondos.
 - **Confirmacion de cancelacion**: Modal de confirmacion antes de cancelar una suscripcion para evitar acciones accidentales.
+
+## Preview
+- Preview:
+- <img width="1680" height="820" alt="image" src="https://github.com/user-attachments/assets/aaaec80f-917c-46d5-9c93-d123dbbe66c0" />
+
+## Live
+https://setium.netlify.app/
+
+
