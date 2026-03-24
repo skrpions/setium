@@ -1,0 +1,41 @@
+<!-- Header -->
+<div class="cancel-modal__header">
+  <div class="cancel-modal__header-icon">
+    <mat-icon>warning</mat-icon>
+  </div>
+  <h2 class="cancel-modal__header-title">Cancelar suscripcion</h2>
+  <p class="cancel-modal__header-subtitle">Esta accion no se puede deshacer</p>
+  <button mat-icon-button mat-dialog-close class="cancel-modal__close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-divider />
+
+<mat-dialog-content class="cancel-modal__content">
+  <div class="cancel-modal__fund-info">
+    <mat-icon class="cancel-modal__fund-icon">
+      {{ data.fund.category === 'FPV' ? 'savings' : 'account_balance_wallet' }}
+    </mat-icon>
+    <div class="cancel-modal__fund-detail">
+      <span class="cancel-modal__fund-name">{{ data.fund.name }}</span>
+      <mat-chip>{{ data.fund.category }}</mat-chip>
+    </div>
+  </div>
+
+  <p class="cancel-modal__message">
+    El monto invertido sera devuelto a tu saldo disponible.
+  </p>
+</mat-dialog-content>
+
+<mat-divider />
+
+<mat-dialog-actions class="cancel-modal__actions">
+  <button mat-stroked-button mat-dialog-close>
+    Volver
+  </button>
+  <button mat-flat-button color="warn" (click)="confirm()">
+    <mat-icon>cancel</mat-icon>
+    Confirmar cancelacion
+  </button>
+</mat-dialog-actions>

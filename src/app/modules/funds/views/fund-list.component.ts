@@ -15,6 +15,7 @@ import {
   SubscribeModalData,
   SubscribeModalResult,
 } from '../components/subscribe-modal/subscribe-modal.component';
+import { CancelModalComponent, CancelModalData } from '../components/cancel-modal/cancel-modal.component';
 
 @Component({
   selector: 'app-fund-list',
@@ -78,12 +79,21 @@ export class FundListComponent implements OnInit {
   }
 
   cancelSubscription(fund: Fund): void {
-    const error = this.stateService.cancelSubscription(fund.id);
+    const dialogRef = this.dialog.open(CancelModalComponent, {
+      data: { fund } as CancelModalData,
+      width: '400px',
+    });
 
-    if (error) {
-      toast.error('Error', { description: error });
-    } else {
-      toast.success('Suscripcion cancelada', { description: fund.name });
-    }
+    dialogRef.afterClosed().subscribe((confirmed?: boolean) => {
+      if (!confirmed) return;
+
+      const error = this.stateService.cancelSubscription(fund.id);
+
+      if (error) {
+        toast.error('Error', { description: error });
+      } else {
+        toast.success('Suscripcion cancelada', { description: fund.name });
+      }
+    });
   }
 }

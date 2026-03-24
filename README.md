@@ -33,8 +33,7 @@ src/app/
     domain/
       entities/                      # Modelos de dominio (Fund, Transaction, Subscription)
       repositories/                  # Interfaces/contratos (puertos)
-    application/
-      state/                         # Servicio central de estado (AppStateService)
+    application/                     # Servicio central de estado (AppStateService)
     infrastructure/
       services/                      # Implementaciones concretas (FundMockService)
   modules/                           # Modulos de negocio
@@ -52,10 +51,19 @@ src/app/
 
 | Capa | Responsabilidad | Ejemplo |
 |------|----------------|---------|
-| **Domain** | Modelos e interfaces puras, sin dependencias externas | `Fund`, `FundRepository` |
-| **Application** | Logica de negocio y estado | `AppStateService` (saldo, suscripciones, historial) |
-| **Infrastructure** | Implementaciones concretas, acceso a datos | `FundMockService` (datos mock) |
+| **Domain** | Modelos e interfaces puras, sin dependencias externas | `Fund`, `Transaction`, `Subscription`, `FundRepository` |
+| **Application** | Logica de negocio y estado centralizado | `AppStateService` (saldo, suscripciones, historial) |
+| **Infrastructure** | Implementaciones concretas, acceso a datos | `FundMockService` (datos mock simulando API REST) |
 | **Modules** | Features de la UI organizados por dominio | Fondos, Transacciones |
+
+## Funcionalidades
+
+1. **Visualizar fondos disponibles** - Lista de fondos FPV y FIC con filtro por categoria.
+2. **Suscribirse a un fondo** - Modal con validacion de monto minimo y formato de moneda (ngx-mask).
+3. **Cancelar suscripcion** - Devolucion automatica del saldo con notificacion al usuario.
+4. **Historial de transacciones** - Tabla en desktop y cards en mobile con detalle de cada operacion.
+5. **Metodo de notificacion** - Seleccion de Email o SMS al suscribirse (se conserva en cancelaciones).
+6. **Mensajes de error** - Feedback visual para saldo insuficiente, monto minimo no alcanzado y suscripcion duplicada.
 
 ## Manejo de estado
 
@@ -68,8 +76,9 @@ Se utiliza **RxJS** con `BehaviorSubject` y `Observable` en un servicio centrali
 ## Stack tecnologico
 
 - **Angular 21** con TypeScript estricto
-- **Angular Material** (M3) - Componentes UI
+- **Angular Material** (M3) con paleta Cyan personalizada
 - **ngx-sonner** - Notificaciones toast
+- **ngx-mask** - Formato de moneda en inputs
 - **RxJS** - Manejo de estado reactivo
 - **Vitest** - Pruebas unitarias
 - **SCSS** con metodologia **BEM**
@@ -103,8 +112,10 @@ npm test
 
 - **Arquitectura Hexagonal**: Desacopla el dominio de la infraestructura. Permite reemplazar los mocks por una API REST real sin modificar la logica de negocio.
 - **RxJS**: Manejo de estado reactivo con `BehaviorSubject`, `Observable` y operadores como `map` y `pipe`.
-- **Lazy loading por ruta**: Los modulos de fondos y transacciones se cargan bajo demanda via `loadComponent`.
-- **Angular Material M3**: Paleta Cyan personalizada con tematizacion consistente.
+- **Lazy loading**: Los modulos de fondos y transacciones se cargan bajo demanda via `loadComponent`.
+- **Angular Material M3**: Paleta Cyan personalizada con variables CSS del sistema (`--mat-sys-*`).
 - **ngx-sonner**: Toasts ligeros y elegantes para feedback visual.
+- **ngx-mask**: Formato de moneda con separador de miles en inputs numericos.
 - **BEM en SCSS**: Metodologia de nombrado que facilita la escalabilidad y mantenimiento de estilos.
 - **Responsive**: Tabla en desktop, cards en mobile para transacciones. Grid adaptable para fondos.
+- **Confirmacion de cancelacion**: Modal de confirmacion antes de cancelar una suscripcion para evitar acciones accidentales.

@@ -1,14 +1,12 @@
 import { Component, input, output } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
 import { Fund } from '../../../../core/domain/entities/fund.model';
 
 @Component({
   selector: 'app-fund-card',
-  imports: [CurrencyPipe, MatCardModule, MatButtonModule, MatIconModule, MatChipsModule],
+  imports: [CurrencyPipe, MatButtonModule, MatIconModule],
   templateUrl: './fund-card.component.html',
   styleUrl: './fund-card.component.scss',
 })

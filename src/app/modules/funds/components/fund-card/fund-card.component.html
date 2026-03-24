@@ -1,36 +1,45 @@
-<mat-card class="fund-card" [class.fund-card--subscribed]="isSubscribed()">
-  @if (isSubscribed()) {
-    <span class="fund-card__badge">Suscrito</span>
-  }
+<div class="fund-card" [class.fund-card--subscribed]="isSubscribed()">
+  <!-- Top row: categoria + badge suscrito -->
+  <div class="fund-card__top">
+    <span class="fund-card__category" [class.fund-card__category--fic]="fund().category === 'FIC'">
+      {{ fund().category }}
+    </span>
+    @if (isSubscribed()) {
+      <span class="fund-card__badge">
+        <mat-icon class="fund-card__badge-icon">check_circle</mat-icon>
+        Suscrito
+      </span>
+    }
+  </div>
 
-  <mat-card-header class="fund-card__header">
-    <mat-icon mat-card-avatar class="fund-card__avatar">
+  <!-- Icono central -->
+  <div class="fund-card__icon-wrapper">
+    <mat-icon class="fund-card__icon">
       {{ fund().category === 'FPV' ? 'savings' : 'account_balance_wallet' }}
     </mat-icon>
-    <mat-card-title class="fund-card__name">{{ fund().name }}</mat-card-title>
-    <mat-card-subtitle>
-      <mat-chip class="fund-card__category">{{ fund().category }}</mat-chip>
-    </mat-card-subtitle>
-  </mat-card-header>
+  </div>
 
-  <mat-card-content class="fund-card__content">
-    <div class="fund-card__detail">
-      <span class="fund-card__label">Monto minimo</span>
-      <span class="fund-card__amount">{{ fund().minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
-    </div>
-  </mat-card-content>
+  <!-- Nombre del fondo -->
+  <span class="fund-card__name">{{ fund().name }}</span>
 
-  <mat-card-actions class="fund-card__actions">
+  <!-- Monto minimo -->
+  <div class="fund-card__amount-section">
+    <span class="fund-card__label">Monto minimo</span>
+    <span class="fund-card__amount">{{ fund().minAmount | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+  </div>
+
+  <!-- Accion -->
+  <div class="fund-card__actions">
     @if (isSubscribed()) {
-      <button mat-stroked-button color="warn" (click)="onCancel.emit(fund())">
+      <button mat-stroked-button color="warn" class="fund-card__btn" (click)="onCancel.emit(fund())">
         <mat-icon>cancel</mat-icon>
         Cancelar
       </button>
     } @else {
-      <button mat-flat-button (click)="onSubscribe.emit(fund())">
+      <button mat-flat-button class="fund-card__btn" (click)="onSubscribe.emit(fund())">
         <mat-icon>add_circle</mat-icon>
         Suscribirse
       </button>
     }
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>
